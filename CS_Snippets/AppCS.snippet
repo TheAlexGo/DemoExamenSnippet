@@ -8,30 +8,33 @@
 		<Snippet>
 			<Code Language="CSharp">
 				<![CDATA[
-using %НАЗВАНИЕ ПРОЕКТА%.Context;
-using %НАЗВАНИЕ ПРОЕКТА%.Entities;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+				using System.Windows;
+				using %НАЗВАНИЕ ПРОЕКТА%.Models;
 
-namespace %НАЗВАНИЕ ПРОЕКТА%
-{
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-        //"User" - название таблицы с клиентами
-        public static User currentUser = null;
-        //"DemoContext" - название контекстного файла
-        public static DemoContext db = new DemoContext();
-    }
-}
-]]>
+				/* Подключаем базу данных
+				* Без логина и пароля:
+				*  Scaffold-DbContext "Server=SERVER;Database=DATABASE;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+				*  
+				*  С логином и паролем:
+				*  Scaffold-DbContext "Server=SERVER;Database=DATABASE;User Id=USERNAME;Password=PASSWORD" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+				*/
+
+				namespace %НАЗВАНИЕ ПРОЕКТА%
+				{
+					/// <summary>
+					/// Логика взаимодействия для App.xaml
+					/// </summary>
+					public partial class App : Application
+					{
+						public static User currentUser = null;
+						public static TadeContext Context
+						{
+							get;
+						}
+						= new TadeContext();
+					}
+				}
+				]]>
 			</Code>
 		</Snippet>
 	</CodeSnippet>
