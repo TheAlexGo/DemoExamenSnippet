@@ -19,9 +19,13 @@ namespace WPF_Demo_Exam.Models
             get
             {
                 if (ProductDiscountAmount == 0)
+                {
                     return $"{ProductCost:N2} рублей";
+                }
                 else
+                {
                     return $"{CostWithDiscount:N2} рублей";
+                }
             }
         }
         public decimal CostWithDiscount
