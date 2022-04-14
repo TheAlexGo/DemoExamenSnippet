@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>ProductPartial CSharp Snippet</Title>
+			<Shortcut>ProductPartialCS</Shortcut>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[
+using System.Windows;
+
+namespace WPF_Demo_Exam.Models
+{
+    public partial class Product
+    {
+        public string TotalCost
+        {
+            get
+            {
+                if (ProductDiscountAmount == 0)
+                    return $"{ProductCost:N2} рублей";
+                else
+                    return $"{CostWithDiscount:N2} рублей";
+            }
+        }
+        public decimal CostWithDiscount
+        {
+            get
+            {
+                if (ProductDiscountAmount == 0)
+                    return ProductCost;
+                else
+                {
+                    decimal costWithDiscount = ProductCost * ((100 - (decimal)ProductDiscountAmount) / 100);
+                    return costWithDiscount;
+                }
+            }
+        }
+
+        public Visibility DiscountVisibility
+        {
+            get
+            {
+                if (ProductDiscountAmount == 0)
+                    return Visibility.Collapsed;
+                else
+                    return Visibility.Visible;
+            }
+        }
+
+        public string BackColor
+        {
+            get
+            {
+                if (ProductDiscountAmount == 0)
+                    return "#FFFFE1";
+                else
+                    return "#D1FFD1";
+            }
+        }
+
+        public byte[] ProductMainPhoto
+        {
+            get
+            {
+                return ProductPhoto ?? Properties.Resources.noPhoto;
+            }
+        }
+    }
+}
+                ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

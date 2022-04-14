@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>CartPage CSharp Snippet</Title>
+			<Shortcut>CartPageCS</Shortcut>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[
+using System.Collections.Generic;
+using System.Windows.Controls;
+using WPF_Demo_Exam.Models;
+using System.Linq;
+using System.Windows;
+
+namespace WPF_Demo_Exam.Pages
+{
+    /// <summary>
+    /// Логика взаимодействия для CartPage.xaml
+    /// </summary>
+    public partial class CartPage : Page
+    {
+        private List<Product> _products;
+        public CartPage(List<Product> products)
+        {
+            InitializeComponent();
+            _products = products;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ShowProducts();
+        }
+
+        // Метод получения товаров и обновления в зависимости от выбранных фильтров
+        private void ShowProducts()
+        {
+            int count;
+
+            // Для заполнения фотографий товаров где они отсутствуют
+            foreach (var p in _products)
+                if (p.ProductPhoto == null)
+                    p.ProductPhoto = Properties.Resources.noPhoto;
+
+            // Выводим всё в наш контейнер listView
+            listViewProducts.ItemsSource = _products;
+            count = _products.Count;
+        }
+
+        private void contextMenuDeleteFromOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Product selectedProduct = listViewProducts.SelectedItem as Product;
+            _products.Remove(selectedProduct);
+            ShowProducts();
+        }
+
+    }
+}
+
+                ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
